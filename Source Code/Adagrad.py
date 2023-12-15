@@ -41,3 +41,17 @@ def adagrad(cost_function, f):
     print("        --->  Minimum value of Cost Function = ", f(current_x))
     print("---------------------------------------------------------------\n")
   
+
+
+# Code execution section
+
+def main():
+    x = Symbol('x')
+    cost_function=input("---> Enter cost function f(x): ").strip()
+    c_f=sympify(cost_function)
+    f = lambdify(x, c_f, "numpy")
+    adagrad(c_f, f)
+
+
+if __name__ == "__main__":
+    main()
