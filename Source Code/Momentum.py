@@ -37,3 +37,18 @@ def momentum(cost_function, func):
     print("    Minima is at = ", xk)
     print("    Minimum value of Cost Function = ", func(xk))
  
+
+
+# Code execution section
+    
+def main():
+    x = Symbol('x')
+    cost_function_input = input("Enter cost function f(x): ").strip()
+    cost_function = sympify(cost_function_input)
+    # lambdify cost_function for fast parallel multipoint computation
+    func = lambdify(x, cost_function, "numpy")
+    momentum(cost_function, func)
+
+
+if __name__ == "__main__":
+    main()
