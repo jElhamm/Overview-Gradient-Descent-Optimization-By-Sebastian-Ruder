@@ -53,4 +53,17 @@ def adam(cost_function, f):
     print("        --->  Minima is at = ", x_k)
     print("        --->  Minimum value of Cost Function = ", f(x_k))
     print("---------------------------------------------------------------\n")
+
+
+
+# Code execution section
     
+def main():
+    x = Symbol('x')
+    cost_function = input("---> Enter cost function f(x): ").strip()
+    cost_function_sympy = sympify(cost_function)
+    f = lambdify(x, cost_function_sympy, "numpy")
+    adam(cost_function_sympy, f)
+
+if __name__ == "__main__":
+    main()  
