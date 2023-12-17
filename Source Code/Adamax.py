@@ -51,4 +51,17 @@ def adamax(cost_function, function):
     print("        ---> Minima is at = ", xk)
     print("        ---> Minimum value of Cost Function = ", function(xk))
     print("---------------------------------------------------------------\n")
-    
+
+
+
+# Code execution section
+
+def main():
+    x = Symbol('x')
+    cost_function = input("---> Enter cost function f(x): ").strip()
+    c_f = sympify(cost_function)                                              # will lambdify c_f for fast parallel multipoint computation
+    f = lambdify(x, c_f, "numpy")
+    adamax(c_f, f)
+
+if __name__ == "__main__":
+    main()
