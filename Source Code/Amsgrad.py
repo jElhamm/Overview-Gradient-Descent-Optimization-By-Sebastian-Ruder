@@ -7,7 +7,7 @@ import scipy as sc
 from sympy import Symbol, diff, lambdify, sympify
 
 
-def nadam(cost_function, f):
+def Amsgrad(cost_function, f):
     x = Symbol('x')
     print("f(x) = ", cost_function)
     f_dash = diff(cost_function, x)
@@ -56,3 +56,17 @@ def nadam(cost_function, f):
     print("        --->  Minima is at = ", xk)
     print("        --->  Minimum value of Cost Function = ", f(xk))
     print("---------------------------------------------------------------\n")
+
+
+
+# Code execution section
+
+def main():
+    x = Symbol('x')
+    cost_function = input("---> Enter cost function f(x): ").strip()
+    c_f = sympify(cost_function)
+    f = lambdify(x, c_f, "numpy")
+    Amsgrad(c_f, f)
+
+if __name__ == "__main__":
+    main()
