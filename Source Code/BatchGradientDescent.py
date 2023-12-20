@@ -38,3 +38,17 @@ def batchGradientDescent(cost_function, f):
     print("        --->  Minima is at =", xk)
     print("        --->  Minimum value of Cost Function =", f(xk))
     print("---------------------------------------------------------------\n")
+
+
+
+# Code execution section
+
+def main():
+  x = Symbol('x')
+  cost_function = input("---> Enter cost function f(x): ").strip()
+  c_f = sympify(cost_function)
+  f = lambdify(x, c_f, "numpy")
+  batchGradientDescent(c_f, f)
+
+if __name__ == "__main__":
+    main()
