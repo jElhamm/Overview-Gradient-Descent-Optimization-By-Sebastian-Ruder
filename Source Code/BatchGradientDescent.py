@@ -21,3 +21,20 @@ def batchGradientDescent(cost_function, f):
     print("        --->  x0 =", initialApproximation)
     print("        --->  f(x0) =", f(initialApproximation))
   
+  #----------------------------------------------------------------------------------------------------
+    numIterations = 0
+    xk = x0
+    while True:
+        numIterations += 1
+        derivative_fk = lambdify(x, derivative_fx, "numpy")(xk)
+        xk = xk - learningRate * derivative_fk
+        if abs(N(xk - x0)) < errorTolerance:
+            break
+
+        x0 = xk
+    #----------------------------------------------------------------------------------------------------
+
+    print(" *** Number of Iterations =", numIterations)
+    print("        --->  Minima is at =", xk)
+    print("        --->  Minimum value of Cost Function =", f(xk))
+    print("---------------------------------------------------------------\n")
