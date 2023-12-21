@@ -21,3 +21,35 @@ def nadam(cost_function, f):
     print("        --->  x0 = ", initialApproximation)
     print("        --->  f(x0) = ", f(initialApproximation))
  
+    #---------------------------------------------------------------------------------------------------------------------------------
+    iterationCount = 0
+    xk = x0
+    x_prev = 0.0
+    m0 = 0.0
+    mk = 0.0
+    v0 = 0.0
+    vk = 0.0
+    b1 = 0.9
+    b2 = 0.999
+    epsilon = 10 ** -8
+    while True:
+        iterationCount += 1
+        x_prev = x0
+        x0 = xk
+        m0 = mk
+        v0 = vk
+        fk_dash = lambdify(x, f_dash, "numpy")(xk)
+        gt = fk_dash
+        mk = b1 * m0 + (1 - b1) * gt
+        vk = b2 * v0 + (1 - b2) * (gt ** 2)
+        mc_k = mk / (1 - b1 ** iterationCount)
+        vc_k = vk / (1 - b2 ** iterationCount)
+        xk = xk - (learningRate / (vc_k ** 0.5 + epsilon)) * (b1 * mc_k + (1 - b1) * gt / (1 - b1 ** iterationCount))
+        if abs(N(xk - x0)) < float(errorTolerance) or abs(N(xk - x_prev)) < 0.1 * float(errorTolerance):
+            break
+    #---------------------------------------------------------------------------------------------------------------------------------
+
+    print(" *** Number of Iterations = ", iterationCount)
+    print("        --->  Minima is at = ", xk)
+    print("        --->  Minimum value of Cost Function = ", f(xk))
+    print("---------------------------------------------------------------\n")
