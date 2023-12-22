@@ -21,3 +21,25 @@ def nesterovAcceleratedGradient(cost_function, function):
     print("        --->  x0 =", initialApproximation)
     print("        --->  f(x0) =", function(initialApproximation))
  
+    #----------------------------------------------------------------------------------------------------------------------------------------------------
+    iterationCount = 0
+    current_x = initialApproximation
+    currentVelocity = 0
+    while True:
+        iterationCount += 1
+        functionDerivativeValue = lambdify(x, function_derivative, "numpy")(current_x -momentumConstant * currentVelocity)
+        updatedVelocity = momentumConstant * currentVelocity + learningRate * functionDerivativeValue
+        current_x = current_x - updatedVelocity
+
+        if abs(N(current_x - initialApproximation)) < errorTolerance:
+            break
+
+        initialApproximation = current_x
+        currentVelocity = updatedVelocity
+    #----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    print(" *** Number of Iterations =", iterationCount)
+    print("        --->  Minima is at =", current_x)
+    print("        --->  Minimum value of Cost Function =", function(current_x))
+    print("---------------------------------------------------------------\n")
+    
