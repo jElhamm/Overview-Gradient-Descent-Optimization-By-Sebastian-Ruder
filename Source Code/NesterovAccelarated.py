@@ -42,4 +42,18 @@ def nesterovAcceleratedGradient(cost_function, function):
     print("        --->  Minima is at =", current_x)
     print("        --->  Minimum value of Cost Function =", function(current_x))
     print("---------------------------------------------------------------\n")
-    
+
+
+
+# Code execution section
+
+def main():
+  x = Symbol('x')
+  costFunction = input("---> Enter cost function f(x): ").strip()
+  costFunctionSympy = sympify(costFunction)
+  costFunctionNumpy = lambdify(x, costFunctionSympy, "numpy")
+  nesterovAcceleratedGradient(costFunctionSympy, costFunctionNumpy)
+
+
+if __name__ == "__main__":
+    main()
