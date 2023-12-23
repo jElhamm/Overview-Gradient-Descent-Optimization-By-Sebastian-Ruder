@@ -19,3 +19,28 @@ def rms_prop(cost_function, function):
     print("        --->  x0 =", initialApproximation)
     print("        --->  f(x0) =", function(initialApproximation))
  
+    #----------------------------------------------------------------------------------------------------------------------------------------------------
+    iterationCount = 0
+    current_x = initialApproximation
+    previous_x = 0.0
+    eg2t_0 = 0.0
+    epsilon = 10.0**-8
+    while True:
+        iterationCount =+1
+        previous_x = initialApproximation
+        initialApproximation = current_x
+        eg2t_k = eg2t_0
+
+        function_derivative_value = (lambdify(x, function_derivative, "numpy"))(current_x)
+        gt = function_derivative_value
+        eg2t_k = 0.9 * eg2t_0 + (0.1) * (gt**2)
+        current_x = current_x - learningRate * gt / ((eg2t_k + epsilon)**0.5)
+
+        if abs(N(current_x - initialApproximation)) < errorTolerance or abs(N(current_x - previous_x)) < 0.1 * errorTolerance:
+            break
+    #----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    print("Number of Iterations =", iterationCount)
+    print("        --->  Minima is at =", current_x)
+    print("        --->  Minimum value of Cost Function =", function(current_x))
+    print("---------------------------------------------------------------\n")
