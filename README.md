@@ -73,6 +73,12 @@
    5. Integrate the algorithms into your own machine learning or optimization projects by importing the necessary modules.
 
 
-## License
+## References
 
    [An overview of gradient descent optimization algorithms](https://www.ruder.io/optimizing-gradient-descent/)
+
+
+## License
+
+   This repository is licensed under the MIT License.
+   See the [LICENSE](./LICENSE) file for more details.
